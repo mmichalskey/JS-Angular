@@ -1,34 +1,39 @@
-function Auction(json){
-    var self = this;
-    self.name = json.name;
-    self.price = json.price;
+var Auction = (function(json){
 
-    self.toTableRow = function(){
+    function Auction(json) {
+        this.name = json.name;
+        this.price = json.price;
+    }
+    
+    Auction.prototype.toTableRow = function(){
         return "<tr><td>"
-        +self.name
+        +this.name
         +"</td><td>"
-        +self.price
+        +this.price
         +"</td></tr>"
     }
-}
+    return Auction;
+})();
 
-function ListOfAuctions(){
-    var auction = [];
-    var self = this;
+var ListOfAuctions = (function(){
 
-    self.addAuction = function(json) {
-        auction.push(new Auction(json));
+    function ListOfAuctions(){
+        this.auction = [];
+    }
+    ListOfAuctions.prototype.addAuction = function(json) {
+        this.auction.push(new Auction(json));
     }
 
-    self.toTable = function(){
+    ListOfAuctions.prototype.toTable = function(){
         var table = "<table><tr><th>Name</th><th>Price</th></tr>";
-        for(var i = 0; i < auction.length; i++){
-            table += auction[i].toTableRow();
+        for(var i = 0; i < this.auction.length; i++){
+            table += this.auction[i].toTableRow();
         }
         table += "</table>";
         return table;
     }
-}
+    return ListOfAuctions;
+})();
 
 function processing() {
     var listOfAuctions = new ListOfAuctions();
