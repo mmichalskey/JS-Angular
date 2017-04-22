@@ -11,9 +11,16 @@ keyups.throttleTime(500).map(function(x) {
     })
     .subscribe(function(x) {
         $('#results').empty();
-        for(var i=0; i<x[1].length; i++) 
-        {
-                $('#results').append(`<h3 style="color: #4f90b5; font-weight: bold">${x[1][i]}</h3><p>${x[2][i]}</p><a href="${x[3][i]}" target="_blank">${x[3][i]}</a><hr style="width: 100%; color: black; height: 1px; background-color:#4f90b5" />`);
+        try{
+            for(var i=0; i<x[1].length; i++) 
+            {
+                    $('#results').append(`<h3 style="color: #4f90b5; font-weight: bold">${x[1][i]}</h3><p>${x[2][i]}</p><a href="${x[3][i]}" target="_blank">${x[3][i]}</a><hr style="width: 100%; color: black; height: 1px; background-color:#4f90b5" />`);
+            }
+        }
+        //can`t get length of undefined if imput is empty, without catch errors research is impossible
+        catch(e){
+            console.log(`Error: ${e}`);
+            $('#results').append(`<h3>Try to find phrase again.</h3>`);
         }
     });
 
