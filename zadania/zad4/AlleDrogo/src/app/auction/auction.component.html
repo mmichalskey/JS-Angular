@@ -1,0 +1,7 @@
+<ul>
+    <li (click)="showPrice = !showPrice; auctionSelected()">{{name}}</li>     
+    <ul *ngIf="showPrice">
+        <li>Price: {{price}}</li>
+    </ul>
+
+</ul>
