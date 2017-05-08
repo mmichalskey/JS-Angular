@@ -1,0 +1,10 @@
+<form [formGroup]="myForm" (ngSubmit)="mySubmit(myForm.value)">
+  <input type="text" [formControl]="firstName">
+  <div *ngIf="firstName.hasError('required')">First name required</div>
+  <br>
+  <input type="text" [formControl]="myForm.controls['lastName']"><br>
+  <div *ngIf="lastName.hasError('maxlength')">Last name too long</div>
+  <div *ngIf="lastName.hasError('required')">Last name required</div>
+  <div *ngIf="lastName.hasError('bolekValue')">Bolek is denied</div>
+  <button type="submit"> OK </button>
+</form>
