@@ -8,28 +8,22 @@ import { FormGroup, FormBuilder, AbstractControl, Validators, FormControl } from
 export class AuctionComponent implements OnInit {
 
 
+  @Input()
+  name: AbstractControl;
+  @Input()
+  price: AbstractControl;
+  @Input()
   editForm: FormGroup;
-  editName: AbstractControl;
-  editPrice: AbstractControl;
-
-  @Input()
-  name: string;
-  @Input()
-  price: number;
 
   @Output()
-  clickEmitter: EventEmitter<string> = new EventEmitter();
+  clickEmitter: EventEmitter<AbstractControl> = new EventEmitter();
 
   constructor(fb: FormBuilder) {
     this.editForm = fb.group({
-      'editName': [this.name],
-      'editPrice': [this.price]
-    
+      'name': [''],
+      'price': ['']
     });
-
-    this.editName = this.editForm.controls['editName'];
-    this.editPrice = this.editForm.controls['editPrice'];
-
+    
    }
 
   ngOnInit() {
@@ -37,12 +31,20 @@ export class AuctionComponent implements OnInit {
 
   auctionSelected() {
     this.clickEmitter.emit(this.name);
+    this.clickEmitter.emit(this.price);
   }
 
   updateAuction(value: any){
-    console.log(value);
+    if(value.name != ""){
+      this.name = value.name;
+    }
+    if(value.price != ""){
+      this.price = value.price;
+    }
   }
 
-  
-
+  deleteAuction(){
+    console.log(`${this.name} has been emitted.`)
+    this.clickEmitter.emit(this.name);
+  }
 }

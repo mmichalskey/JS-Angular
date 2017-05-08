@@ -1,14 +1,14 @@
 <form class="form-horizontal" [formGroup]="myForm" (ngSubmit)="mySubmit(myForm.value)">
   <div class="form-group">
     <div class="col-sm-4">
-      <div style="color:crimson" *ngIf="auctionName.hasError('required')">Name of auction required</div>
-      <input class="form-control .input-medium" type="text" placeholder="Name of auction" [formControl]="auctionName">
+      <div style="color:crimson" *ngIf="name.hasError('required')">Name of auction required</div>
+      <input class="form-control .input-medium" type="text" placeholder="Name of auction" [formControl]="name">
     </div>
   </div>
   <div class="form-group">
     <div class="col-sm-4">
-      <div style="color:crimson" *ngIf="auctionPrice.hasError('required')">Price of auction required</div>
-      <input class="form-control .input-medium" type="text" placeholder="Price of product" [formControl]="auctionPrice">
+      <div style="color:crimson" *ngIf="price.hasError('required')">Price of auction required</div>
+      <input class="form-control .input-medium" type="text" placeholder="Price of product" [formControl]="price">
     </div>
   </div>
   <button type="submit" class="btn btn-primary">Add</button>
@@ -16,7 +16,7 @@
 <hr />
 <div style="margin-top: 20px">
   <h4>Auctions:</h4>
-  <app-auction *ngFor="let auction of auctions" [name]="auction.name" [price]="auction.price"></app-auction>  
+  <app-auction *ngFor="let auction of auctions" [name]="auction.name" [price]="auction.price" (clickEmitter)="deleteAuction($event)"></app-auction>  
 </div>
 
 

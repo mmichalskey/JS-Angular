@@ -8,21 +8,21 @@ import { FormGroup, FormBuilder, AbstractControl, Validators, FormControl } from
 })
 export class AuctionsListComponent implements OnInit {
 
-  auctions: Auction[];
+  auctions: Array<any>;
   myForm: FormGroup;
-  auctionName: AbstractControl;
-  auctionPrice: AbstractControl;
+  name: AbstractControl;
+  price: AbstractControl;
 
 
   constructor(fb: FormBuilder) { 
     this.myForm = fb.group({
-      'auctionName': ['', Validators.required],
-      'auctionPrice': ['', Validators.required]
+      'name': ['', Validators.required],
+      'price': ['', Validators.required]
     
     });
 
-    this.auctionName = this.myForm.controls['auctionName'];
-    this.auctionPrice = this.myForm.controls['auctionPrice'];
+    this.name = this.myForm.controls['name'];
+    this.price = this.myForm.controls['price'];
 
     this.auctions = [ 
       {"name": "Rower", "price": 800},
@@ -32,13 +32,14 @@ export class AuctionsListComponent implements OnInit {
     ];
   }
 
-  mySubmit(value: any) {
-    this.auctions.push(new Auction(value.auctionName, value.auctionPrice));
-    this.myForm.reset();
+  mySubmit(value: Auction) {
+    console.log(new Auction(value.name, value.price));
+    this.auctions.push(new Auction(value.name, value.price));
   }
 
-  deleteAuction(value: any) {
-    console.log("Auction removed");
+  deleteAuction(name: string) {
+      const index: number = this.auctions.findIndex(i => i.name === name);
+      this.auctions.splice(index, 1);
   }
 
   ngOnInit() {
