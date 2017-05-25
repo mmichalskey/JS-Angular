@@ -1,0 +1,21 @@
+
+<div *ngIf="!showEdit" style="cursor: pointer; cursor: hand; margin-top: 5px" (click)="showDetails = !showDetails">{{name}}</div>
+<div style="font-weight: bold; margin: 5px" *ngIf="showDetails">
+    {{name}} {{price}} $
+    <span style="cursor: pointer; cursor: hand;" class="glyphicon glyphicon-pencil" (click)="showDetails = !showDetails; showEdit = !showEdit"></span>
+    <span style="cursor: pointer; cursor: hand;" class="glyphicon glyphicon-trash"  (click)="deleteAuction()"></span>
+</div>
+
+<div *ngIf="showEdit">
+    <form class="form-inline" [formGroup]="editForm">
+    <div class="form-group">
+        <input type="text"  [formControl]="editForm.controls['name']" value="{{name}}">
+    </div>
+    <div class="form-group">
+        <input type="text" [formControl]="editForm.controls['price']" value="{{price}}">
+    </div>
+    <button (click)="showEdit = !showEdit; updateAuction(editForm.value)">Save</button>
+    <button (click)="showEdit = !showEdit">Cancel</button>
+    </form>
+</div>
+
